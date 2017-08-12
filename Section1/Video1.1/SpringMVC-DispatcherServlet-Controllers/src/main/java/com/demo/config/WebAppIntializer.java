@@ -9,7 +9,7 @@ import org.springframework.web.servlet.support.*;
 public class WebAppIntializer extends AbstractAnnotationConfigDispatcherServletInitializer{
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		// TODO Auto-generated method stub
+		// application context created by DispatcherServlet by loading web components
 		return new Class<?>[] { WebConfig.class };
 	}
 
@@ -21,7 +21,7 @@ public class WebAppIntializer extends AbstractAnnotationConfigDispatcherServletI
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		// TODO Auto-generated method stub
+		// application context created by ContextLoaderListener
 		return null;
 	}
 

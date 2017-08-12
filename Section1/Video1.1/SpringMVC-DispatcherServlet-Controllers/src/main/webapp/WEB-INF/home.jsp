@@ -9,13 +9,8 @@
 </head>
 <body>
 
-	<c:if test="${pageContext.request.userPrincipal.name != null}">
-		<h2>
-			Welcome : ${pageContext.request.userPrincipal.name} | <a
-				href="${pageContext.request.contextPath}/logout"> Logout</a>				
- 		</h2>
-		<p>Your Session id is: "${pageContext.request.session.id}"</p>
-	</c:if>
+Hello and Welcome to Spring5-ReactJs tutorial
+<p>Your Session id is: "${pageContext.request.session.id}"</p>
 
 </body>
 </html>
