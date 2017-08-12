@@ -3,7 +3,6 @@ package com.demo.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -30,16 +29,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		return resolver;
 	}
 
-	@Bean
-	public RequestContextListener requestContextListener() {
-		// TODO Auto-generated method stub
-		return new RequestContextListener();
-	}
-
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		// forward static resources request to servlet container
 		configurer.enable();
 	}
-	
 }
