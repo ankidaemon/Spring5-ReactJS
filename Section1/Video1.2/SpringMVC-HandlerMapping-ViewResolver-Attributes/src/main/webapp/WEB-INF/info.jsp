@@ -31,11 +31,11 @@
 				<td>${employee.age}</td>
 			</tr>
 			<tr>
-				<td>Address</td>
+				<td>Phone No</td>
 				<td>${employee.phoneNo}</td>
 			</tr>
 			<tr>
-				<td>Phone No</td>
+				<td>Address</td>
 				<td>${employee.address}</td>
 			</tr>
 		</table>
