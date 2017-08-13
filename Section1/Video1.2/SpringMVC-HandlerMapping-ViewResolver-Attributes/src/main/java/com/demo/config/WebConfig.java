@@ -1,6 +1,5 @@
 package com.demo.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -9,12 +8,12 @@ import org.springframework.core.io.Resource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.ResourceBundleViewResolver;
 import org.springframework.web.servlet.view.XmlViewResolver;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 /**
  * @author ankidaemon
@@ -57,6 +56,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		// forward static resources request to servlet container
 		configurer.enable();
 	}
+	
+	/*@Override
+    public void addInterceptors(InterceptorRegistry registry) {
+            registry.addInterceptor(customHandlerInterceptor()).addPathPatterns("/info");
+    }*/
 	
 	@Bean
 	RequestMappingHandlerMapping requestMappingHandlerMapping(){
