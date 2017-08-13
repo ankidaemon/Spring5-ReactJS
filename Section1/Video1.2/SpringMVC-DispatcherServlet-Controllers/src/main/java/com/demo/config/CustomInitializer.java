@@ -27,7 +27,7 @@ public class CustomInitializer implements WebApplicationInitializer {
 		fReg.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), false, "/customReq/**");
 		
 		//Custom Listener Registration
-		//servletContext.addListener(new ContextLoaderListener(null));
+		//servletContext.addListener(new ContextLoaderListener("context xml file loc"));
 	}
 
 }
