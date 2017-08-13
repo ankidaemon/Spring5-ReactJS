@@ -1,9 +1,6 @@
 package com.demo.config;
 
-import javax.servlet.Filter;
-import javax.servlet.ServletRegistration.Dynamic;
-
-import org.springframework.web.servlet.support.*;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
  * @author ankidaemon
@@ -26,17 +23,5 @@ public class WebAppIntializer extends AbstractAnnotationConfigDispatcherServletI
 	protected Class<?>[] getRootConfigClasses() {
 		// application context created by ContextLoaderListener
 		return null;
-	}
-	
-	@Override
-	protected Filter[] getServletFilters() {
-		//return your filter array
-		return null;
-	}
-	
-	@Override
-	protected void customizeRegistration(Dynamic registration){
-		//Do Something
-	}
-	
+	}	
 }

@@ -33,38 +33,38 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		resolver.setOrder(2);
 		return resolver;
 	}
-		
+
 	@Bean
-	public ResourceBundleViewResolver resourceBundleViewResolver(){
-		ResourceBundleViewResolver res= new ResourceBundleViewResolver();
+	public ResourceBundleViewResolver resourceBundleViewResolver() {
+		ResourceBundleViewResolver res = new ResourceBundleViewResolver();
 		res.setBasename("resourcebundle-views");
 		res.setOrder(1);
 		return res;
 	}
-	
+
 	@Bean
-	public XmlViewResolver xmlViewResolver(){
-		XmlViewResolver res=new XmlViewResolver();
-		Resource resource=new ClassPathResource("/views.xml");
+	public XmlViewResolver xmlViewResolver() {
+		XmlViewResolver res = new XmlViewResolver();
+		Resource resource = new ClassPathResource("/views.xml");
 		res.setLocation(resource);
 		res.setOrder(0);
 		return res;
 	}
-	
+
 	@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		// forward static resources request to servlet container
 		configurer.enable();
 	}
-	
+
 	/*@Override
-    public void addInterceptors(InterceptorRegistry registry) {
-            registry.addInterceptor(customHandlerInterceptor()).addPathPatterns("/info");
-    }*/
-	
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(customHandlerInterceptor()).addPathPatterns("/info");
+	}*/
+
 	@Bean
-	RequestMappingHandlerMapping requestMappingHandlerMapping(){
-		RequestMappingHandlerMapping reqHandlerMapping=new RequestMappingHandlerMapping();
+	RequestMappingHandlerMapping requestMappingHandlerMapping() {
+		RequestMappingHandlerMapping reqHandlerMapping = new RequestMappingHandlerMapping();
 		reqHandlerMapping.setInterceptors(customHandlerInterceptor());
 		return reqHandlerMapping;
 	}
