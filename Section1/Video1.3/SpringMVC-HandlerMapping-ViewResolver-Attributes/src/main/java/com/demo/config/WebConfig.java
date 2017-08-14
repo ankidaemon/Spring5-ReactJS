@@ -1,19 +1,25 @@
 package com.demo.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.ResourceBundleViewResolver;
 import org.springframework.web.servlet.view.XmlViewResolver;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 /**
  * @author ankidaemon
@@ -30,7 +36,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		resolver.setPrefix("/WEB-INF/");
 		resolver.setSuffix(".jsp");
 		resolver.setExposeContextBeansAsAttributes(true);
-		resolver.setOrder(2);
+		resolver.setOrder(4);
 		return resolver;
 	}
 
@@ -38,7 +44,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	public ResourceBundleViewResolver resourceBundleViewResolver() {
 		ResourceBundleViewResolver res = new ResourceBundleViewResolver();
 		res.setBasename("resourcebundle-views");
-		res.setOrder(1);
+		res.setOrder(3);
 		return res;
 	}
 
@@ -47,8 +53,25 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		XmlViewResolver res = new XmlViewResolver();
 		Resource resource = new ClassPathResource("/views.xml");
 		res.setLocation(resource);
-		res.setOrder(0);
+		res.setOrder(2);
 		return res;
+	}
+
+	@Bean
+	public ContentNegotiatingViewResolver contentNegotiatingViewResolver() {
+		ContentNegotiatingViewResolver cNVResolver = new ContentNegotiatingViewResolver();
+		List<ViewResolver> listViewResolver = new ArrayList<ViewResolver>();
+		listViewResolver.add(viewResolver());
+		listViewResolver.add(resourceBundleViewResolver());
+		cNVResolver.setViewResolvers(listViewResolver);
+
+		List<View> defaultViews = new ArrayList<View>();
+		MappingJackson2JsonView jsonView = new MappingJackson2JsonView();
+		defaultViews.add(jsonView);
+		cNVResolver.setDefaultViews(defaultViews);
+
+		cNVResolver.setOrder(1);
+		return cNVResolver;
 	}
 
 	@Override
@@ -57,10 +80,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		configurer.enable();
 	}
 
-	/*@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(customHandlerInterceptor()).addPathPatterns("/info");
-	}*/
+	/*
+	 * @Override public void addInterceptors(InterceptorRegistry registry) {
+	 * registry.addInterceptor(customHandlerInterceptor()).addPathPatterns(
+	 * "/info"); }
+	 */
 
 	@Bean
 	RequestMappingHandlerMapping requestMappingHandlerMapping() {
