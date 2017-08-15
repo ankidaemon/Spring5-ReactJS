@@ -10,7 +10,9 @@ import java.util.StringJoiner;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.demo.exceptionhandlers.CustomException;
 import com.demo.to.Employee;
 
 /**
@@ -29,6 +32,11 @@ import com.demo.to.Employee;
  */
 @Controller
 public class HomeController {
+	
+	@ExceptionHandler(CustomException.class)
+	public String customExceptionHandler(){
+		return "error";
+	}
 
 	@RequestMapping(value = { "/", "/home" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView visitHome() {
@@ -58,14 +66,17 @@ public class HomeController {
 			employee.setPhoneNo(9999999999L);
 			mav.addObject("employee", employee);
 		} else {
-			mav.addObject("error", "No Employee found having eId " + employeeId);
+			//mav.addObject("error", "No Employee found having eId " + employeeId);
+			//throw new RuntimeException();
+			//throw new CustomException();
+			throw new IllegalStateException();
 		}
 		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 		return mav;
 	}
 
 	@PostMapping("/signUp")
-	public ModelAndView signUp(Employee employee, RedirectAttributes rattr) {
+	public ModelAndView signUp(@ModelAttribute Employee employee, RedirectAttributes rattr) {
 		ModelAndView mav = new ModelAndView();
 		mav.setView(new RedirectView("/info#next", true));
 		// do something in database to save incoming employee

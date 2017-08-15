@@ -5,6 +5,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Sorry, this is our maintence time.</h1>
+<h1>Something went wrong, please try again.</h1>
 </body>
 </html>
