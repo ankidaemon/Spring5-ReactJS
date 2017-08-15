@@ -10,7 +10,7 @@
 	<properties>
 		<logback.version>1.0.13</logback.version>
 		<slf4j.version>1.7.5</slf4j.version>
-		<spring.version>5.0.0.M5</spring.version>
+		<spring.version>5.0.0.RC3</spring.version>
 	</properties>
 	<dependencies>
 		<dependency>

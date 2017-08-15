@@ -20,7 +20,7 @@ import com.demo.to.Employee;
 @Controller
 public class HomeController {
 
-	@RequestMapping(value = { "/", "/home" }, method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = { "/", "/home" }, method = { RequestMethod.GET })
 	public ModelAndView visitHome() {
 		ModelAndView mav = new ModelAndView("home");
 		return mav;
@@ -67,6 +67,11 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("info");
 		return mav;
 	}
-
+	
+	@GetMapping("/downTime")
+	public ModelAndView downTime() {
+		ModelAndView mav = new ModelAndView("downTime");
+		return mav;
+	}
 
 }

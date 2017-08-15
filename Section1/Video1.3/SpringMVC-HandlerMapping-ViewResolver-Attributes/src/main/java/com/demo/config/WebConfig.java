@@ -3,6 +3,7 @@ package com.demo.config;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +14,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -28,7 +29,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.demo")
-public class WebConfig extends WebMvcConfigurerAdapter {
+public class WebConfig implements WebMvcConfigurer {
 	@Bean
 	public ViewResolver viewResolver() {
 		// TODO Auto-generated method stub
@@ -80,18 +81,22 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		configurer.enable();
 	}
 
-	/*
-	 * @Override public void addInterceptors(InterceptorRegistry registry) {
-	 * registry.addInterceptor(customHandlerInterceptor()).addPathPatterns(
-	 * "/info"); }
-	 */
+	@Autowired
+	CustomHandlerInterceptor customHandlerInterceptor;
+	
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(customHandlerInterceptor)
+		.addPathPatterns("/info")
+		.excludePathPatterns("/downTime");
+	}
 
-	@Bean
-	RequestMappingHandlerMapping requestMappingHandlerMapping() {
+	/*@Bean
+	public RequestMappingHandlerMapping requestMappingHandlerMapping() {
 		RequestMappingHandlerMapping reqHandlerMapping = new RequestMappingHandlerMapping();
 		reqHandlerMapping.setInterceptors(customHandlerInterceptor());
 		return reqHandlerMapping;
-	}
+	}*/
 
 	@Bean
 	public CustomHandlerInterceptor customHandlerInterceptor() {

@@ -5,6 +5,8 @@ import java.util.Calendar;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -13,7 +15,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  *
  */
 public class CustomHandlerInterceptor extends HandlerInterceptorAdapter {
-
+	
 	int downTime = 24;
 
 	@Override
@@ -21,8 +23,8 @@ public class CustomHandlerInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		if (!request.getMethod().equalsIgnoreCase("POST")) {
 			Calendar cal = Calendar.getInstance();
-			if (downTime ==  cal.get(Calendar.HOUR_OF_DAY) ) {
-				response.sendRedirect("/SpringMVC-DispatcherServlet-Controllers/error.html");
+			if (downTime == 24/* cal.get(Calendar.HOUR_OF_DAY)*/ ) {
+				response.sendRedirect(request.getContextPath() + "/downTime");
 				return false;
 			} else
 				return true;
