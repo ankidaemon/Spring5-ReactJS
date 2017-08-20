@@ -84,12 +84,12 @@ public class WebConfig implements WebMvcConfigurer {
 	@Autowired
 	CustomHandlerInterceptor customHandlerInterceptor;
 	
-	@Override
+	/*@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(customHandlerInterceptor)
 		.addPathPatterns("/info")
 		.excludePathPatterns("/downTime");
-	}
+	}*/
 
 	/*@Bean
 	public RequestMappingHandlerMapping requestMappingHandlerMapping() {
