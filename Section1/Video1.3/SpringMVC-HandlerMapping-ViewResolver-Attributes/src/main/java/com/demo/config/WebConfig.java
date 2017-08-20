@@ -94,7 +94,7 @@ public class WebConfig implements WebMvcConfigurer {
 	/*@Bean
 	public RequestMappingHandlerMapping requestMappingHandlerMapping() {
 		RequestMappingHandlerMapping reqHandlerMapping = new RequestMappingHandlerMapping();
-		reqHandlerMapping.setInterceptors(customHandlerInterceptor());
+		reqHandlerMapping.setInterceptors(customHandlerInterceptor);
 		return reqHandlerMapping;
 	}*/
 
