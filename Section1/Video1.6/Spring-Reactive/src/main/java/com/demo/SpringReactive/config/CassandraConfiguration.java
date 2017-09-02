@@ -20,7 +20,7 @@ public class CassandraConfiguration extends AbstractReactiveCassandraConfigurati
 	public CassandraClusterFactoryBean cluster() {
 		CassandraClusterFactoryBean cluster = new CassandraClusterFactoryBean();
 		cluster.setContactPoints("127.0.0.1");
-		cluster.setPort(9142);
+		cluster.setPort(9042);
 		return cluster;
 	}
 
