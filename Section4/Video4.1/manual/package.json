@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run build",
     "build": "webpack -d && copy public\\index.html dist\\index.html && webpack-dev-server --content-base public/ --inline --hot --port 7894",
-    "build:prod": "webpack -p && copy public\\index.html dist\\index.html"
+    "build:prod": "webpack -p && copy public\\index.html dist\\index.html",
+    "watch": "webpack -d && copy public\\index.html dist\\index.html && webpack-dev-server --progress --colors --content-base public/ --inline --hot --port 7894"
   },
   "author": "ankidaemon",
   "license": "ISC",
