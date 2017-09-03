@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+	<style>
+	table {
+		border:1px;
+		border-style:dotted;
+	}	
+	.profile {
+		border-width: 10px;
+		border-style: inset;
+		border-color: aquamarine;
+	}
+	</style>
+  </head>
+  
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+	  function sum1(a,b){
+		return a + b;
+	  }
+	  const person = [
+			"John Watson",
+			"Sherlock Holmes"
+	  ]
+	  const occupation = [
+			"Doctor",
+			"Detective"
+	  ]
+	  function employee(person, occupation){
+			return person[0] + ' is a ' + occupation[0] + ' and ' + person[1] + ' is a ' + occupation[1];
+	  }
+	  function conditionalRendering(p, o){
+			if(o == 'Doctor'){
+			return <p> {p} is a Doctor </p>
+			}
+	  }
+	  const pic = "http://cimg.tvgcdn.net/i/2016/09/26/f309ed55-c277-4aaf-bb9a-33d8129bdb8b/bigbrother-news.jpg";
+	  var toRender = (
+		<div>
+			<p>
+			Sum of 2 and 5 is :	{sum1(2,5)}
+			</p>
+			<h3>
+			JS expression:
+			</h3>
+			{employee(person,occupation)}
+			<br/>
+			<h3>
+			JSX as expression:
+			</h3>
+			{conditionalRendering(person[0],occupation[0])}
+			
+			<img src={pic} width="50%" className="profile" />
+		</div>
+	  )
+      ReactDOM.render(
+		toRender,
+        document.getElementById('root')
+      );
+
+    </script>
+  </body>
+</html>
