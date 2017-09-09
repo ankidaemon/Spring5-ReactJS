@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="utf-8" />
+		<script src="https://unpkg.com/react@latest/dist/react.min.js"></script>
+		<script src="https://unpkg.com/react-dom@latest/dist/react-dom.min.js"></script>
+		<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+		<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+function Page(props) {
+  return (
+   <div className="page">
+    
+	<div className="header">
+      <p>Application Bla Bla</p>
+    </div>
+    
+	<div className="mainmenu">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+    </div>
+    
+	<div className="sidebar">
+      {/* SideBar and... this is how to write JSX comments */}
+    </div>
+	
+	<center>
+	<h3>{props.name}</h3>
+    <div className="content">
+	<form>
+	<table>
+	<tr><td>  UserName : </td> <td> <input type="text"></input> </td></tr>
+	<tr><td>  Password : </td> <td> <input type="text"></input> </td></tr>
+	<tr><td>  Confirm Password : </td> <td> <input type="text"></input> </td></tr>
+	<tr><td>  Phone Number : </td> <td> <input type="text"></input> </td></tr>
+	<tr><td>  <input type="submit" value="Submit"></input> </td> <td>
+			  <input type="reset" value="Reset"></input> </td></tr>
+	</table>
+	</form>
+    </div>
+	</center>
+	
+    <div className="footer">
+		<center>
+			<p>Copyright (c) 2017</p>
+		</center>
+    </div>
+   </div>
+  );
+}
+
+const element = <Page name="Sign Up" />;
+
+ReactDOM.render(
+  <Page name="Sign Up" />,
+  document.getElementById('root')
+);
+</script>
+</body>
+</html>

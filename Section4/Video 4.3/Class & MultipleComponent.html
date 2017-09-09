@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="utf-8" />
+		<script src="https://unpkg.com/react@latest/dist/react.min.js"></script>
+		<script src="https://unpkg.com/react-dom@latest/dist/react-dom.min.js"></script>
+		<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+		<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+
+class Header extends React.Component {
+render() {
+  return (
+	<div className="header">
+      <p>Application Bla Bla</p>
+    </div>
+  );
+  }
+}
+
+class Footer extends React.Component {
+render() {
+  return (
+	<div className="footer">
+		<center>
+			<p>Copyright (c) 2017</p>
+		</center>
+    </div>
+  );
+  }
+}
+
+class MainMenu extends React.Component {
+render() {
+  return (
+	<div className="mainmenu">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+		<li><a className="focus" href="#">SignUp</a></li>
+      </ul>
+    </div>
+  );
+  }
+}
+
+class Sidebar extends React.Component {
+render() {
+  return (
+	<div className="sidebar">
+      {/* SideBar and... this is how to write JSX comments */}
+    </div>
+  );
+  }
+}
+
+class Submitbutton extends React.Component {
+render() {
+  return (
+	<input type="submit" value="Submit"></input>
+  );
+  }
+}
+
+class Resetbutton extends React.Component {
+render() {
+  return (
+	<input type="reset" value="Reset"></input>
+  );
+  }
+}
+
+class Usercredentials extends React.Component {
+render() {
+  return (
+	<tbody>
+	<tr><td>  UserName : </td> <td> <input type="text"></input> </td></tr>
+	<tr><td>  Password : </td> <td> <input type="text"></input> </td></tr>
+	</tbody>
+  );
+  }
+}
+
+class Page extends React.Component {
+render() {
+  return (
+   <div className="page">
+	
+	<Header />
+	<MainMenu active="SignUp" />
+	<center>
+	<h3>{this.props.name}</h3>
+    <div className="content">
+	<form>
+	<table>
+	<Usercredentials />
+	<tr><td>  Confirm Password : </td> <td> <input type="text"></input> </td></tr>
+	<tr><td>  Phone Number : </td> <td> <input type="text"></input> </td></tr>
+	<tr><td> <Submitbutton />  </td> <td>
+			 <Resetbutton /> </td></tr>
+	</table>
+	</form>
+    </div>
+	</center>
+	
+	<Footer />
+   </div>
+  );
+  }
+}
+
+const element = <Page name="Sign Up" />;
+
+ReactDOM.render(
+  <Page name="Sign Up" />,
+  document.getElementById('root')
+);
+</script>
+</body>
+</html>
