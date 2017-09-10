@@ -1,0 +1,70 @@
+.mainmenu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #56f781;
+}
+
+.mainmenu li {
+    float: right;
+}
+
+.mainmenu li a {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.mainmenu li a:hover, .mainmenu li a:active , .mainmenu li a.focus:link, a.focus:visited{
+    background-color: rgb(30, 132, 0);
+    border-top: 2px solid #fff810;
+	color:white;
+}
+
+.page{
+  margin: 0 auto;
+}
+
+input {
+	margin: 10px;
+	display: block;
+}
+
+.header {
+	background: -webkit-linear-gradient(rgba(36, 178, 0, 0.98), rgb(30, 132, 0), rgba(36, 178, 0, 0.98));
+	background: -o-linear-gradient(rgba(36, 178, 0, 0.98), rgb(30, 132, 0), rgba(36, 178, 0, 0.98));
+	background: -moz-linear-gradient(rgba(36, 178, 0, 0.98), rgb(30, 132, 0), rgba(36, 178, 0, 0.98));
+	background: linear-gradient(rgba(36, 178, 0, 0.98), rgb(30, 132, 0), rgba(36, 178, 0, 0.98));
+	padding: 10px;
+	border-bottom: 2px solid #fff810;
+}
+
+.header p {
+	color: white;
+    font-weight: bold;
+    font-family: Monotype Corsiva, sans-serif;
+    font-size: 30px;
+    margin: 15px;
+    margin-left: 30px;
+}
+
+.footer {
+	background: -webkit-linear-gradient(rgba(36, 178, 0, 0.98), rgb(30, 132, 0), rgba(36, 178, 0, 0.98));
+	background: -o-linear-gradient(rgba(36, 178, 0, 0.98), rgb(30, 132, 0), rgba(36, 178, 0, 0.98));
+	background: -moz-linear-gradient(rgba(36, 178, 0, 0.98), rgb(30, 132, 0), rgba(36, 178, 0, 0.98));
+	background: linear-gradient(rgba(36, 178, 0, 0.98), rgb(30, 132, 0), rgba(36, 178, 0, 0.98));
+	padding: 10px;
+	border-bottom: 2px solid #fff810;
+	color:white;
+}
+
+.content {
+	display: inline-block;
+    margin: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 20px 4px #1e8500;
+}

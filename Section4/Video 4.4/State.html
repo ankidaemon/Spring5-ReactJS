@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>State</title>
+    <script src="https://unpkg.com/react@latest/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+	<style>
+	td {
+		background: black;
+		color: white;
+		padding: 10px;
+		border-top: 17px white ridge;
+		font-size: 20px;
+		font-weight: bold;
+	}
+	</style>
+  </head>
+  
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+	  class Calender extends React.Component {
+			constructor(props) {
+				super(props);
+				this.state = {cal: new Date()};
+			}
+
+			componentDidMount() {
+				this.cal = setInterval(
+				() => this.tick(),
+				1000
+				);
+			}
+
+			componentWillUnmount() {
+				clearInterval(this.cal);
+			}
+
+			tick() {
+				this.setState({
+				cal: new Date()
+				});
+			}
+
+			render() {
+				return (
+					<div>
+						<table>
+						<tr>
+						<td>{this.state.cal.getDate()}</td>
+						<td>{this.state.cal.getMonth()+1}</td>
+						<td>{this.state.cal.getFullYear()}</td>
+						<td>{this.state.cal.getHours()}</td>
+						<td>{this.state.cal.getMinutes()}</td>
+						<td>{this.state.cal.getSeconds()}</td>
+						</tr>
+						</table>
+					</div>
+				);
+			}
+		}
+
+		ReactDOM.render(
+			<Calender />,
+			document.getElementById('root')
+		);
+
+    </script>
+  </body>
+</html>

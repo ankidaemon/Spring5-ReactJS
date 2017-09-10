@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>List Iterator</title>
+    <script src="https://unpkg.com/react@latest/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+	function ListIterator(props) {
+		var array = [1, 2, 3, 4, 5];
+		var listItems = array.map(
+							(array) => <tr><td key={array.toString()}>{array}</td></tr>
+							);
+		return (
+				<table>
+					{listItems}
+				</table>
+		);
+	}
+
+	ReactDOM.render(
+		<ListIterator />,
+		document.getElementById('root')
+	);
+    </script>
+  </body>
+</html>
