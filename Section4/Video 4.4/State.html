@@ -28,17 +28,17 @@
 			}
 
 			componentDidMount() {
-				this.cal = setInterval(
-				() => this.tick(),
+				this.calender = setInterval(
+				() => this.update(),
 				1000
 				);
 			}
 
 			componentWillUnmount() {
-				clearInterval(this.cal);
+				clearInterval(this.calender);
 			}
 
-			tick() {
+			update() {
 				this.setState({
 				cal: new Date()
 				});
