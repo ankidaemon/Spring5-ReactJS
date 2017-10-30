@@ -1,5 +1,7 @@
 package com.demo.web;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.demo.model.User;
 import com.demo.service.UserServiceImpl;
@@ -30,8 +34,10 @@ public class HomeController {
 	@RequestMapping(value = {"/create","/"},method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
-	public void create(@RequestBody User user) {
+	public ResponseEntity<?> create(@RequestBody User user,UriComponentsBuilder uCB) {
 		service.createUser(user);
+		UriComponents uc = uCB.path("/{id}").buildAndExpand(user.getUserId());
+		return ResponseEntity.created(uc.toUri()).build();
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.PUT)
