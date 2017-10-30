@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,8 +42,10 @@ public class HomeController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
-	public User findOne(@PathVariable("id") int userId) {
-		return service.findOne(userId);
+	public ResponseEntity<User> findOne(@PathVariable("id") int userId) {
+		User user=service.findOne(userId);
+		HttpStatus status=user!=null?HttpStatus.OK:HttpStatus.NOT_FOUND;
+		return new ResponseEntity<User>(user,status);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
