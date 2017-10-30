@@ -46,14 +46,14 @@ public class UserDaoImpl implements UserDao {
 	
 	@Override
 	public void update(User user) {
-		String queryUser = "update users set userName=? where userId=?)";
+		String queryUser = "update users set userName=? where userId=?";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		jdbcTemplate.update(queryUser, new Object[] { user.getUserName(),user.getUserId() });
 	}
 	
 	@Override
 	public void delete(int id) {
-		String queryUser = "delete from users where userId=?)";
+		String queryUser = "delete from users where userId=?";
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		jdbcTemplate.update(queryUser, new Object[] { id });
 	}

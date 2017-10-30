@@ -4,7 +4,6 @@ public class User {
 	String userName;
 	int userId;
 	String phone;
-	boolean enabled;
 	
 	public String getUserName() {
 		return userName;
@@ -23,11 +22,5 @@ public class User {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-	public boolean isEnabled() {
-		return enabled;
-	}
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
 	}
 }

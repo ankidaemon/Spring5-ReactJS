@@ -41,7 +41,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
-	public User findOne(@PathVariable("Id") int userId) {
+	public User findOne(@PathVariable("id") int userId) {
 		return service.findOne(userId);
 	}
 	
@@ -51,7 +51,7 @@ public class HomeController {
 		return service.findAll();
 	}
 	
-	@RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable("id") int id) {
 		service.delete(id);

@@ -15,7 +15,6 @@ public class CustomRowMapper implements RowMapper
 		user.setUserId(rs.getInt("userId"));
 		user.setUserName(rs.getString("username"));
 		user.setPhone(rs.getString("phone"));
-		user.setEnabled(rs.getBoolean("enabled"));
 		return user;
 	}
 }
