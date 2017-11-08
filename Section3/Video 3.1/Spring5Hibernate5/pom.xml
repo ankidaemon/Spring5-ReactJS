@@ -111,6 +111,12 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate.validator}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.0</version>
+		</dependency>
 
 	</dependencies>
 	<repositories>
@@ -121,14 +127,6 @@
 			<id>central</id>
 			<name>Central Repository</name>
 			<url>https://repo.maven.apache.org/maven2</url>
-		</repository>
-		<repository>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<id>Spring</id>
-			<name>Spring MileStones</name>
-			<url>http://repo.spring.io/milestone/</url>
 		</repository>
 	</repositories>
 	<build>

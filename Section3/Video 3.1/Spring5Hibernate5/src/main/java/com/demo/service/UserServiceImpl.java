@@ -23,6 +23,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public User findOne(int id) {
 		// TODO Auto-generated method stub
 		return userDao.findOne(id);

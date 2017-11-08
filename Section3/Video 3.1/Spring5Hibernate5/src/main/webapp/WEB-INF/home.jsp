@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -8,14 +9,18 @@
 <script type="text/javascript">
 var ctx = "${pageContext.request.contextPath}";
 function getUser(){
-	var id=document.getElementById("userId").val;
-	alert(id);
+	var id=document.getElementById("userid").value;
 	window.location = ctx+'/'+id;
 }
 function deleteUser(id){
 	window.location = ctx+'/delete/'+id;
 }
 </script>
+<style type="text/css">
+.errors{
+color:red;
+}
+</style>
 </head>
 <body>
 	Hello and Welcome to Spring5-ReactJs tutorial
@@ -31,31 +36,50 @@ function deleteUser(id){
 				<fieldset style="width: fit-content;">
 					<legend>Create</legend>
 					<c:url value="/create" var="createUrl" />
-					<form action="${createUrl}" method="post">
+					<form:form action="${createUrl}" method="post" enctype="text" modelAttribute="user">
+						<form:errors path="*" cssClass="errors" element="div" /> 
 						<table>
 							<tr>
-								<td>Name</td>
-								<td><input type="text" name="name" placeholder="Enter your Name"></td>
+								<td><form:label path="userName">Name : </form:label></td>
+								<td><form:input type="text"	path="userName" /></td>
 							</tr>
 							<tr>
-								<td>Phone</td>
-								<td><input type="text" name="phone" placeholder="Enter your Phone"></td>
+								<td><form:label path="phone">Please Enter Phone</form:label></td>
+								<td><form:input type="text"	path="phone" /></td>
 							</tr>
 							<tr>
 								<td></td>
 								<td><input type="submit"></td>
 							</tr>
 						</table>
-					</form>
+					</form:form>
 				</fieldset>
 			</td>
 			<td>
 				<fieldset style="width: fit-content;">
-				<legend>User Finder</legend>
+				<legend>User Finder By ID</legend>
 				
 					User-Id:
-					<input type="text" name="userId" id="userId" />
-					<button type="button" onclick="getUser()"></button>
+					<input type="text" name="userId" id="userid" />
+					<button type="button" onclick="getUser()">Find User</button>
+				</fieldset>
+			</td>
+			<td>
+				<fieldset style="width: fit-content;">
+				<legend>User Finder By Name</legend>
+				
+					User-Name:
+					<input type="text" name="username" id="username" />
+					<button type="button" onclick="getUser()">Find User</button>
+				</fieldset>
+			</td>
+			<td>
+				<fieldset style="width: fit-content;">
+				<legend>Find all Users</legend>
+					<c:url value="/all" var="allUrl" />
+					<form action="${allUrl}" method="get">
+					<input type="submit" value="Find All Users"/>
+					</form>
 				</fieldset>
 			</td>
 		</tr>
@@ -79,11 +103,11 @@ function deleteUser(id){
 					<td>
 						<form action="${updateUrl}" method="">
 						<input type="hidden" name="id" value="${user.userId}"/>
-						<input type="submit" name="Update"/>
+						<input type="submit" name="Update" value="Update"/>
 						</form>
 					</td>
 					<td>
-						<button type="button" onclick="deleteUser('${user.userId}')"></button>
+						<button type="button" onclick="deleteUser('${user.userId}')">Delete</button>
 					</td>
 				</tr>
 			</c:forEach>

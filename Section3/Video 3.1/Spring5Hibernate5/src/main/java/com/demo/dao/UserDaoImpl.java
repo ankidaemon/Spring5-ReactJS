@@ -47,10 +47,4 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
-	/*
-	 * public void createTable(){ String query=
-	 * "create table IF NOT EXISTS users(userId int not null, username varchar(10) not null ,phone varchar(10) null, PRIMARY KEY (userId))"
-	 * ; JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-	 * jdbcTemplate.execute(query); }
-	 */
 }

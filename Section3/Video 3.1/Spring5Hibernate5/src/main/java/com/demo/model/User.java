@@ -10,12 +10,16 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.annotations.Proxy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
 
 @Scope(scopeName = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Component
 @Entity
 @Table(name = "User")
+@Proxy(lazy=false)
 public class User {
 
 	@Column(name = "USER_NAME")
@@ -29,7 +33,7 @@ public class User {
 	int userId;
 	
 	@Pattern(regexp="(^$|[0-9]{10})")
-	@NotEmpty
+	@NotEmpty(message = "Please number can't be empty.")
 	String phone;
 
 	public String getUserName() {

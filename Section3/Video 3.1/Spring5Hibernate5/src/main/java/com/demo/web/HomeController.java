@@ -1,29 +1,22 @@
 package com.demo.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.util.UriComponents;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import com.demo.model.User;
-import com.demo.service.UserServiceImpl;
+import com.demo.service.UserService;
 
 
 /**
@@ -34,7 +27,7 @@ import com.demo.service.UserServiceImpl;
 public class HomeController {
 	
 	@Autowired
-	private UserServiceImpl service;
+	private UserService service;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView renderHome() {
@@ -45,6 +38,7 @@ public class HomeController {
 	@RequestMapping(value = {"/create","/"},method = RequestMethod.POST)
 	public String create(@Valid @ModelAttribute("user") User user, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
+			System.out.println("result has errors"); 
 			attr.addFlashAttribute("org.springframework.validation.BindingResult.user", result);
 			attr.addFlashAttribute("user", user);
 			return "redirect:/";
@@ -65,7 +59,9 @@ public class HomeController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView findOne(@PathVariable("id") int userId) {
 		ModelAndView mav = new ModelAndView("home");
-		mav.addObject("userList",service.findOne(userId));
+		List<User> users=new ArrayList<>();
+		users.add(service.findOne(userId));
+		mav.addObject("userList",users);
 		return mav;
 	}
 	
@@ -76,7 +72,7 @@ public class HomeController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/delete/${id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public ModelAndView delete(@PathVariable("id") int id) {
 		ModelAndView mav = new ModelAndView("home");
 		service.delete(id);
