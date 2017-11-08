@@ -12,12 +12,19 @@ function getUser(){
 	alert(id);
 	window.location = ctx+'/'+id;
 }
+function deleteUser(id){
+	window.location = ctx+'/delete/'+id;
+}
 </script>
 </head>
 <body>
 	Hello and Welcome to Spring5-ReactJs tutorial
 	<br>
 	<br>
+	<c:if test="${not empty added}"><p style="color:green;font-weight:bold;">${added}</p></c:if>
+	<c:if test="${not empty deleted}"><p style="color:green;font-weight:bold;">${deleted}</p></c:if>
+	<c:if test="${not empty updated}"><p style="color:green;font-weight:bold;">${updated}</p></c:if>
+	<c:if test="${empty userList}">
 	<table>
 		<tr>
 			<td>
@@ -53,8 +60,35 @@ function getUser(){
 			</td>
 		</tr>
 	</table>
-
-
+	</c:if>
+	
+	<c:if test="${not empty userList}">
+		<c:url value="/update" var="updateUrl" />
+		<c:url value="/delete" var="deleteUrl" />
+		<table>
+			<tr>
+				<td>Name</td>
+				<td>Phone</td>
+				<td>Update</td>
+				<td>Delete</td>
+			</tr>
+			<c:forEach var="user" items="${userList}">
+				<tr>
+					<td>${user.userName}</td>
+					<td>${user.phone}</td>
+					<td>
+						<form action="${updateUrl}" method="">
+						<input type="hidden" name="id" value="${user.userId}"/>
+						<input type="submit" name="Update"/>
+						</form>
+					</td>
+					<td>
+						<button type="button" onclick="deleteUser('${user.userId}')"></button>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</c:if>
 	
 </body>
 </html>

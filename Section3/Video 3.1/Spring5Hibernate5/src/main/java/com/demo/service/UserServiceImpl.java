@@ -36,12 +36,14 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
+	@Transactional 
 	public void update(User user) {
 		// TODO Auto-generated method stub
 		userDao.update(user);
 	}
 	
 	@Override
+	@Transactional
 	public void delete(int id) {
 		// TODO Auto-generated method stub
 		userDao.delete(id);

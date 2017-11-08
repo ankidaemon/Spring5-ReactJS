@@ -37,19 +37,19 @@ public class SpringRestTemplateApplication {
 		return args -> {
 			//getMethods(restTemplate);
 			//putMethod(restTemplate);
-			postMethods(restTemplate);
+			//postMethods(restTemplate);
 			//deleteMethod(restTemplate);
-			//miscellaneousMethods(restTemplate);
+			miscellaneousMethods(restTemplate);
 		};
 	}
 	
 	void getMethods(RestTemplate restTemplate){
-		int id=0;
+		int id=1;
 		User user = restTemplate.getForObject("http://localhost:8080/SpringRestAPI/{id}", User.class,id);
 		System.out.println(user.toString());
 		
 		Map<String, String> urlVariables = new HashMap<String, String>();
-		urlVariables.put("id", "0");
+		urlVariables.put("id", "1");
 		ResponseEntity<User> response= restTemplate.getForEntity("http://localhost:8080/SpringRestAPI/{id}", User.class,urlVariables);
 		if(response.getStatusCode() == HttpStatus.OK){
 			System.out.println(response.getBody());
@@ -59,7 +59,7 @@ public class SpringRestTemplateApplication {
 	void putMethod(RestTemplate restTemplate){
 		User user=new User();
 		user.setUserName("Joker");
-		user.setUserId(0);
+		user.setUserId(1);
 		user.setPhone("1234567890");
 		String url = "http://localhost:8080/SpringRestAPI/update/";
 		restTemplate.put(URI.create(url), user);
@@ -67,8 +67,8 @@ public class SpringRestTemplateApplication {
 	
 	void postMethods(RestTemplate restTemplate){
 		User user=new User();
-		user.setUserId(5);
-		user.setUserName("newUser1");
+		user.setUserId(2);
+		user.setUserName("newUser");
 		user.setPhone("0987654321");
 		
 		//restTemplate.postForObject("http://localhost:8080/SpringRestAPI/create/", user, User.class);
@@ -79,7 +79,7 @@ public class SpringRestTemplateApplication {
 	}
 	
 	void deleteMethod(RestTemplate restTemplate){
-		int id=0;
+		int id=2;
 		restTemplate.delete("http://localhost:8080/SpringRestAPI/delete/{id}", id);
 	}
 	
