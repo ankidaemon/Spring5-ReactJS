@@ -87,8 +87,7 @@ color:red;
 	</c:if>
 	
 	<c:if test="${not empty userList}">
-		<c:url value="/update" var="updateUrl" />
-		<c:url value="/delete" var="deleteUrl" />
+		<c:url value="/updatePage" var="updatePageUrl" />
 		<table>
 			<tr>
 				<td>Name</td>
@@ -101,7 +100,7 @@ color:red;
 					<td>${user.userName}</td>
 					<td>${user.phone}</td>
 					<td>
-						<form action="${updateUrl}" method="">
+						<form action="${updatePageUrl}" method="POST">
 						<input type="hidden" name="id" value="${user.userId}"/>
 						<input type="submit" name="Update" value="Update"/>
 						</form>

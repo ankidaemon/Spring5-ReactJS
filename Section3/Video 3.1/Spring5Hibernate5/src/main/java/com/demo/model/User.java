@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 public class User {
 
 	@Column(name = "USER_NAME")
-	@Size(max = 20, min = 3, message = "{user.name.invalid}")
+	@Size(max = 20, min = 3, message = "Name length allowed: Max=20, Min=3")
 	@NotEmpty(message = "Please Enter your name")
 	String userName;
 	

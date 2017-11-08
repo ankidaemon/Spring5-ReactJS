@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -38,7 +39,6 @@ public class HomeController {
 	@RequestMapping(value = {"/create","/"},method = RequestMethod.POST)
 	public String create(@Valid @ModelAttribute("user") User user, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
-			System.out.println("result has errors"); 
 			attr.addFlashAttribute("org.springframework.validation.BindingResult.user", result);
 			attr.addFlashAttribute("user", user);
 			return "redirect:/";
@@ -48,12 +48,18 @@ public class HomeController {
 		return "redirect:/";
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public ModelAndView update(@Valid @ModelAttribute("user") User user, BindingResult result, RedirectAttributes attr) {
-		ModelAndView mav = new ModelAndView("home");
-		service.update(user);
-		mav.addObject("updated","User having id: "+user.getUserId()+" successfully updated.");
+	@RequestMapping(value = "/updatePage", method = RequestMethod.POST)
+	public ModelAndView renderUpdatePage(@RequestParam(value="id") int id) {
+		ModelAndView mav = new ModelAndView("update");
+		mav.addObject("toUpdate",service.findOne(id));
 		return mav;
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String update(@Valid @ModelAttribute("user") User user, BindingResult result, RedirectAttributes attr) {
+		service.update(user);
+		attr.addFlashAttribute("updated","User having id: "+user.getUserId()+" successfully updated.");
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
