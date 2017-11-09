@@ -26,6 +26,7 @@ public class RepositoryConfig {
 		ds.setUrl(url);
 		ds.setUsername(username);
 		ds.setPassword(password);
+		ds.addConnectionProperty("shutdown", "true");
 		return ds;
 	}
 	
