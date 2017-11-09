@@ -39,7 +39,7 @@ public class RepositoryConfig {
 		ds.setUrl(url);
 		ds.setUsername(username);
 		ds.setPassword(password);
-		System.out.println(ds.getPassword());
+		ds.addConnectionProperty("shutdown", "true");
 		return ds;
 	}
 	

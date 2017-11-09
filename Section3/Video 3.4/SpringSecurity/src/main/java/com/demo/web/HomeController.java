@@ -36,7 +36,7 @@ public class HomeController {
 		return mav;
 	}
 
-	@RequestMapping(value = {"/create","/"},method = RequestMethod.POST)
+	@RequestMapping(value = {"/create"},method = RequestMethod.POST)
 	public String create(@Valid @ModelAttribute("user") User user, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
 			attr.addFlashAttribute("org.springframework.validation.BindingResult.user", result);
