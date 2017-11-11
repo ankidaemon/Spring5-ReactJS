@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 		.authorizeRequests()
 			.antMatchers("/create","/updatePage","/delete/*").access("hasRole('ADMIN')")
-			.regexMatchers("/all/.*").hasAnyRole("LOCAL","ADMIN")
+			.antMatchers("/all").hasAnyRole("LOCAL","ADMIN")
 		.anyRequest().authenticated()
 		.and()
 		.requiresChannel().anyRequest().requiresInsecure();
@@ -56,6 +56,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			//.logoutSuccessUrl("/customSuccessPage")
 		
 		http.csrf().disable();
+		
+		//Access Denied Page
+		http.exceptionHandling().accessDeniedPage("/accessDenied");
 
 	}
 }

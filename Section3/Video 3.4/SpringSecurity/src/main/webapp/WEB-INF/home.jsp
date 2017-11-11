@@ -75,10 +75,11 @@ color:red;
 			<td>
 				<fieldset style="width: fit-content;">
 				<legend>User Finder By Name</legend>
-				
-					User-Name:
-					<input type="text" name="username" id="username" />
-					<button type="button" onclick="getUser()">Find User</button>
+				<c:url value="/nameFinder" var="nameFinder" />
+					<form action="${nameFinder}" method="POST">
+						<input type="text" name="name" value=""/>
+						<input type="submit" name="Find User" value="Find User"/>
+					</form>
 				</fieldset>
 			</td>
 			<td>
