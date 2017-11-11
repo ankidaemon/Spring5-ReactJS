@@ -1,5 +1,6 @@
 package com.demo.config;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -10,14 +11,17 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
+import org.springframework.context.annotation.FilterType;
 /**
  * @author ankidaemon
  *
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.demo")
+@ComponentScan(basePackages = {"com.demo.model","com.demo.web"},excludeFilters = {@ComponentScan.Filter(
+	    type = FilterType.ASSIGNABLE_TYPE,
+	    value = {SecurityConfig.class,RepositoryConfig.class})
+	  })
 public class WebConfig implements WebMvcConfigurer {
 	@Bean
 	public ViewResolver viewResolver() {

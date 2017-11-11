@@ -23,7 +23,15 @@ color:red;
 </style>
 </head>
 <body>
-	Hello and Welcome to Spring5-ReactJs tutorial
+	<h2 style="display:inline-block;">
+	Welcome ${pageContext.request.userPrincipal.name}
+	</h2>	
+	<div style="display:inline-block; float: right;">
+	<c:url value="/logout" var="logOutUrl"/>
+    	<form:form name="form" action="${logOutUrl}" method="post">
+            <input type="submit" value="log Out" />
+    </form:form>
+    </div>	
 	<br>
 	<br>
 	<c:if test="${not empty added}"><p style="color:green;font-weight:bold;">${added}</p></c:if>
