@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.model.User;
 import com.demo.service.UserService;
-
 
 /**
  * @author ankidaemon
@@ -36,7 +36,7 @@ public class HomeController {
 		return mav;
 	}
 
-	@RequestMapping(value = {"/create","/"},method = RequestMethod.POST)
+	@RequestMapping(value = {"/create"},method = RequestMethod.POST)
 	public String create(@Valid @ModelAttribute("user") User user, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
 			attr.addFlashAttribute("org.springframework.validation.BindingResult.user", result);
@@ -71,6 +71,13 @@ public class HomeController {
 		return mav;
 	}
 	
+	@PostMapping("/nameFinder")
+	public ModelAndView findByUserName(@RequestParam(value="name") String userName) {
+		ModelAndView mav = new ModelAndView("home");
+		mav.addObject("userList",service.findByUserName(userName));
+		return mav;
+	}
+	
 	@RequestMapping(value = "/all",method = RequestMethod.GET)
 	public ModelAndView findAll() {
 		ModelAndView mav = new ModelAndView("home");
@@ -85,5 +92,4 @@ public class HomeController {
 		mav.addObject("deleted","User having id: "+id+" successfully deleted.");
 		return mav;
 	}
-
 }

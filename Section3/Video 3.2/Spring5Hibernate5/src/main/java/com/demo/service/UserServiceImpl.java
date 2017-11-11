@@ -11,7 +11,7 @@ import com.demo.model.User;
 
 @Service
 public class UserServiceImpl implements UserService {
-	
+
 	@Autowired
 	UserDao userDao;
 
@@ -21,28 +21,35 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		userDao.save(user);
 	}
-	
+
 	@Override
 	@Transactional(readOnly = true)
 	public User findOne(int id) {
 		// TODO Auto-generated method stub
 		return userDao.findOne(id);
 	}
-	
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<User> findByUserName(String userName) {
+		// TODO Auto-generated method stub
+		return userDao.findByUserName(userName);
+	}
+
 	@Override
 	@Transactional(readOnly = true)
 	public List<User> findAll() {
 		// TODO Auto-generated method stub
 		return userDao.findAll();
 	}
-	
+
 	@Override
-	@Transactional 
+	@Transactional
 	public void update(User user) {
 		// TODO Auto-generated method stub
 		userDao.update(user);
 	}
-	
+
 	@Override
 	@Transactional
 	public void delete(int id) {

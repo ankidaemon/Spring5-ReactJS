@@ -22,6 +22,6 @@ public class WebAppIntializer extends AbstractAnnotationConfigDispatcherServletI
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		// application context created by ContextLoaderListener
-		return new Class<?>[] {RootConfig.class};
+		return new Class<?>[] { RepositoryConfig.class };
 	}	
 }

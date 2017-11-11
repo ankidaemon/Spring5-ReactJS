@@ -5,15 +5,18 @@ import java.util.Properties;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
+@PropertySource("classpath:application.properties")
+@ComponentScan(basePackages={"com.demo.service","com.demo.dao"})
 public class RepositoryConfig {
-
 	@Value("${jdbc.driverClassName}")
 	private String driverClassName;
 	@Value("${jdbc.url}")
@@ -32,14 +35,13 @@ public class RepositoryConfig {
 	@Value("${hibernate.hbm2ddl.auto}")
 	private String hibernateHbm2ddlAuto;
 
-	@Bean()
+	@Bean
 	public BasicDataSource getDataSource() {
 		BasicDataSource  ds = new BasicDataSource();
 		ds.setDriverClassName(driverClassName);
 		ds.setUrl(url);
 		ds.setUsername(username);
 		ds.setPassword(password);
-		ds.addConnectionProperty("shutdown", "true");
 		return ds;
 	}
 	

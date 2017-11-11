@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Spring5-ReactJs</title>
+<title>Spring5-Hibernate5</title>
 <script type="text/javascript">
 var ctx = "${pageContext.request.contextPath}";
 function getUser(){
@@ -23,7 +23,9 @@ color:red;
 </style>
 </head>
 <body>
-	Hello and Welcome to Spring5-ReactJs tutorial
+	<h2 style="display:inline-block;">
+	Welcome to Spring5-Hibernate5
+	</h2>	
 	<br>
 	<br>
 	<c:if test="${not empty added}"><p style="color:green;font-weight:bold;">${added}</p></c:if>
@@ -67,10 +69,11 @@ color:red;
 			<td>
 				<fieldset style="width: fit-content;">
 				<legend>User Finder By Name</legend>
-				
-					User-Name:
-					<input type="text" name="username" id="username" />
-					<button type="button" onclick="getUser()">Find User</button>
+				<c:url value="/nameFinder" var="nameFinder" />
+					<form action="${nameFinder}" method="POST">
+						<input type="text" name="name" value=""/>
+						<input type="submit" name="Find User" value="Find User"/>
+					</form>
 				</fieldset>
 			</td>
 			<td>
