@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataBuilder;
 import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
@@ -48,6 +47,7 @@ public class BootStrapUtility {
 
         return metadata.getSessionFactoryBuilder().build();
 	}
+	
 	public static void shutdown() {
 		// TODO Auto-generated method stub
 		

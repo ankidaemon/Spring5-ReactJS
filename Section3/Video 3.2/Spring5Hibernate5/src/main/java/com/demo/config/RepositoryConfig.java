@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
-@ComponentScan(basePackages={"com.demo.service","com.demo.dao"})
+@ComponentScan(basePackages = { "com.demo.service", "com.demo.dao" })
 public class RepositoryConfig {
 	@Value("${jdbc.driverClassName}")
 	private String driverClassName;
@@ -27,7 +27,7 @@ public class RepositoryConfig {
 	private String password;
 	@Value("${jdbc.initSql}")
 	private String initSql;
-	
+
 	@Value("${hibernate.dialect}")
 	private String hibernateDialect;
 	@Value("${hibernate.show_sql}")
@@ -37,14 +37,14 @@ public class RepositoryConfig {
 
 	@Bean
 	public BasicDataSource getDataSource() {
-		BasicDataSource  ds = new BasicDataSource();
+		BasicDataSource ds = new BasicDataSource();
 		ds.setDriverClassName(driverClassName);
 		ds.setUrl(url);
 		ds.setUsername(username);
 		ds.setPassword(password);
 		return ds;
 	}
-	
+
 	@Bean
 	public Properties getHibernateProperties() {
 		Properties properties = new Properties();
@@ -53,21 +53,20 @@ public class RepositoryConfig {
 		properties.put("hibernate.hbm2ddl.auto", hibernateHbm2ddlAuto);
 		return properties;
 	}
-	
+
 	@Bean
-    public LocalSessionFactoryBean getSessionFactory()
-    {
+	public LocalSessionFactoryBean getSessionFactory() {
 		LocalSessionFactoryBean lsfb = new LocalSessionFactoryBean();
-        lsfb.setDataSource(getDataSource());
-        lsfb.setHibernateProperties(getHibernateProperties());        
-        lsfb.setPackagesToScan(new String[]{"com.demo.model"});
-        return lsfb;
-    }
-	
+		lsfb.setDataSource(getDataSource());
+		lsfb.setHibernateProperties(getHibernateProperties());
+		lsfb.setPackagesToScan(new String[] { "com.demo.model" });
+		return lsfb;
+	}
+
 	@Bean
-    public HibernateTransactionManager getTransactionManager() {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(getSessionFactory().getObject());
-        return transactionManager;
-    }
+	public HibernateTransactionManager getTransactionManager() {
+		HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+		transactionManager.setSessionFactory(getSessionFactory().getObject());
+		return transactionManager;
+	}
 }
