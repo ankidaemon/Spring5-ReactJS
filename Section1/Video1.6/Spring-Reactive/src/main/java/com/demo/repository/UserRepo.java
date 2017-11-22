@@ -8,6 +8,6 @@ import com.demo.model.User;
 import reactor.core.publisher.Flux;
 
 public interface UserRepo extends ReactiveMongoRepository<User, Integer> {
-	@Query("{ 'username': ?0 }")
+	@Query("{ 'userName': ?0 }")
 	Flux<User> findByUserName(final String userName);
 }
