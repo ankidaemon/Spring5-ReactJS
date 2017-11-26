@@ -35,10 +35,10 @@ public class ReactiveWebClientApplication {
 	@Bean
 	public CommandLineRunner run(WebClient webClient) throws Exception {
 		return args -> {
-			get(webClient);
+			//get(webClient);
 			post(webClient);
-			put(webClient);
-			delete(webClient);
+			//put(webClient);
+			//delete(webClient);
 		};
 	}
 
@@ -86,8 +86,8 @@ public class ReactiveWebClientApplication {
 				.body(UserFlux, User.class).retrieve().bodyToMono(Void.class);*/
 
 		User user = new User();
-		user.setUserName("BatMan");
-		user.setUserId(1);
+		user.setUserName("IronMan");
+		user.setUserId(8);
 		user.setPhone("1234567890");
 
 		Mono<Void> result1 = webClient.post().uri("/create").contentType(MediaType.APPLICATION_JSON).syncBody(user)
