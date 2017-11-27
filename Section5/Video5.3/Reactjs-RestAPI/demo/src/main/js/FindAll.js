@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CreateButton from './CreateButton';
 
 var rest, mime, errorCode, client;
 rest = require('rest'),
@@ -26,7 +27,11 @@ class FindAll extends Component {
 	
     render() {
       return (
-            <UserListComponent users={this.state.users}/>
+    		  <div>
+       		  <UserListComponent users={this.state.users}/>
+    		  <br/>
+       		  <CreateButton changeOperation={this.changeOperation} />
+       		  </div>
       );
     }
 }
@@ -62,3 +67,5 @@ class UserComponent extends React.Component{
 }
 
 export default FindAll;
+export UserComponent;
+export UserListComponent;

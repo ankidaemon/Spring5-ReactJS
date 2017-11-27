@@ -2011,22 +2011,22 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-20
 (function(define) { 'use strict';
 !(__WEBPACK_AMD_DEFINE_RESULT__ = function (require) {
 
-	var timed = __webpack_require__(201);
-	var array = __webpack_require__(203);
-	var flow = __webpack_require__(204);
-	var fold = __webpack_require__(205);
-	var inspect = __webpack_require__(206);
-	var generate = __webpack_require__(207);
-	var progress = __webpack_require__(208);
-	var withThis = __webpack_require__(209);
-	var unhandledRejection = __webpack_require__(210);
+	var timed = __webpack_require__(202);
+	var array = __webpack_require__(204);
+	var flow = __webpack_require__(205);
+	var fold = __webpack_require__(206);
+	var inspect = __webpack_require__(207);
+	var generate = __webpack_require__(208);
+	var progress = __webpack_require__(209);
+	var withThis = __webpack_require__(210);
+	var unhandledRejection = __webpack_require__(211);
 	var TimeoutError = __webpack_require__(90);
 
 	var Promise = [array, flow, fold, generate, progress,
 		inspect, withThis, timed, unhandledRejection]
 		.reduce(function(Promise, feature) {
 			return feature(Promise);
-		}, __webpack_require__(212));
+		}, __webpack_require__(213));
 
 	var apply = __webpack_require__(92)(Promise);
 
@@ -6987,7 +6987,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 	} else if (!capturedSetTimeout) { // vert.x
 		var vertxRequire = require;
-		var vertx = __webpack_require__(202);
+		var vertx = __webpack_require__(203);
 		setTimer = function (f, ms) { return vertx.setTimer(ms, f); };
 		clearTimer = vertx.cancelTimer;
 		asap = vertx.runOnLoop || vertx.runOnContext;
@@ -23466,7 +23466,7 @@ module.exports = ReactDOMInvalidARIAHook;
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -23474,6 +23474,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = __webpack_require__(56);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _FindAll = __webpack_require__(199);
+
+var _FindAll2 = _interopRequireDefault(_FindAll);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23484,124 +23488,77 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var rest, mime, errorCode, client;
-rest = __webpack_require__(199), mime = __webpack_require__(215);
-errorCode = __webpack_require__(228);
+rest = __webpack_require__(200), mime = __webpack_require__(216);
+errorCode = __webpack_require__(229);
 
 client = rest.wrap(mime).wrap(errorCode);
 
 var App = function (_Component) {
-	_inherits(App, _Component);
+    _inherits(App, _Component);
 
-	function App(props) {
-		_classCallCheck(this, App);
+    function App(props) {
+        _classCallCheck(this, App);
 
-		var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-		_this.state = { users: [] };
-		return _this;
-	}
+        _this.state = {
+            currentOperation: 'read',
+            id: null
+        };
+        return _this;
+    }
 
-	_createClass(App, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			var _this2 = this;
+    _createClass(App, [{
+        key: 'changeOperation',
+        value: function changeOperation(newOperation, id) {
+            this.setState({ currentOperation: newOperation });
+            if (id !== undefined) {
+                this.setState({ id: id });
+            }
+        }
+    }, {
+        key: 'render',
+        value: function render() {
 
-			client({ path: '/findAll' }).then(function (response) {
-				console.log(response);
-				console.log(response.entity);
-				_this2.setState({ users: response.entity });
-			});
-		}
-	}, {
-		key: 'render',
-		value: function render() {
-			return _react2.default.createElement(UserListComponent, { users: this.state.users });
-		}
-	}]);
+            var OperationComponent = _react2.default.createElement(_FindAll2.default, { changeOperation: this.changeOperation });
 
-	return App;
+            switch (this.state.currentOperation) {
+                case 'read':
+                    OperationComponent = _react2.default.createElement(_FindAll2.default, { changeOperation: this.changeOperation });
+                    break;
+                case 'readOne':
+                    OperationComponent = _react2.default.createElement(FindOne, { id: this.state.id, changeOperation: this.changeOperation });
+                    break;
+                case 'create':
+                    OperationComponent = _react2.default.createElement(Create, { changeOperation: this.changeOperation });
+                    break;
+                case 'update':
+                    OperationComponent = _react2.default.createElement(Update, { id: this.state.id, changeOperation: this.changeOperation });
+                    break;
+                case 'delete':
+                    OperationComponent = _react2.default.createElement(Delete, { id: this.state.id, changeOperation: this.changeOperation });
+                    break;
+                default:
+                    break;
+            }
+
+            return OperationComponent;
+        }
+    }]);
+
+    return App;
 }(_react.Component);
-
-var UserListComponent = function (_React$Component) {
-	_inherits(UserListComponent, _React$Component);
-
-	function UserListComponent() {
-		_classCallCheck(this, UserListComponent);
-
-		return _possibleConstructorReturn(this, (UserListComponent.__proto__ || Object.getPrototypeOf(UserListComponent)).apply(this, arguments));
-	}
-
-	_createClass(UserListComponent, [{
-		key: 'render',
-		value: function render() {
-			var users = this.props.users.map(function (user) {
-				return _react2.default.createElement(UserComponent, { key: user.id, user: user });
-			});
-			return _react2.default.createElement(
-				'table',
-				null,
-				_react2.default.createElement(
-					'tbody',
-					null,
-					_react2.default.createElement(
-						'tr',
-						null,
-						_react2.default.createElement(
-							'th',
-							null,
-							'User Name'
-						),
-						_react2.default.createElement(
-							'th',
-							null,
-							'Phone'
-						)
-					),
-					users
-				)
-			);
-		}
-	}]);
-
-	return UserListComponent;
-}(_react2.default.Component);
-
-var UserComponent = function (_React$Component2) {
-	_inherits(UserComponent, _React$Component2);
-
-	function UserComponent() {
-		_classCallCheck(this, UserComponent);
-
-		return _possibleConstructorReturn(this, (UserComponent.__proto__ || Object.getPrototypeOf(UserComponent)).apply(this, arguments));
-	}
-
-	_createClass(UserComponent, [{
-		key: 'render',
-		value: function render() {
-			return _react2.default.createElement(
-				'tr',
-				null,
-				_react2.default.createElement(
-					'td',
-					null,
-					this.props.user.userName
-				),
-				_react2.default.createElement(
-					'td',
-					null,
-					this.props.user.phone
-				)
-			);
-		}
-	}]);
-
-	return UserComponent;
-}(_react2.default.Component);
 
 exports.default = App;
 
 /***/ }),
 /* 199 */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: SyntaxError: C:/Users/ankidaemon/git/Spring5-ReactJS/Section5/Video5.3/Reactjs-RestAPI/demo/src/main/js/FindAll.js: Only one default export allowed per module. (70:0)\n\n  68 | \n  69 | export default FindAll;\n> 70 | export default UserComponent;\n     | ^\n  71 | export default UserListComponent;\n  72 | \n");
+
+/***/ }),
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -23617,7 +23574,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 	!(__WEBPACK_AMD_DEFINE_RESULT__ = function (require) {
 
 		var rest = __webpack_require__(89),
-		    browser = __webpack_require__(200);
+		    browser = __webpack_require__(201);
 
 		rest.setPlatformDefaultClient(browser);
 
@@ -23633,7 +23590,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 
 /***/ }),
-/* 200 */
+/* 201 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -23814,7 +23771,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 
 /***/ }),
-/* 201 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-2014 original author or authors */
@@ -23899,13 +23856,13 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-20
 
 
 /***/ }),
-/* 202 */
+/* 203 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 203 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-2014 original author or authors */
@@ -24211,7 +24168,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-20
 
 
 /***/ }),
-/* 204 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-2014 original author or authors */
@@ -24378,7 +24335,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-20
 
 
 /***/ }),
-/* 205 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-2014 original author or authors */
@@ -24412,7 +24369,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-20
 
 
 /***/ }),
-/* 206 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-2014 original author or authors */
@@ -24439,7 +24396,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-20
 
 
 /***/ }),
-/* 207 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-2014 original author or authors */
@@ -24511,7 +24468,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-20
 
 
 /***/ }),
-/* 208 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-2014 original author or authors */
@@ -24542,7 +24499,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-20
 
 
 /***/ }),
-/* 209 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-2014 original author or authors */
@@ -24587,7 +24544,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-20
 
 
 /***/ }),
-/* 210 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-2014 original author or authors */
@@ -24598,7 +24555,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-20
 !(__WEBPACK_AMD_DEFINE_RESULT__ = function(require) {
 
 	var setTimer = __webpack_require__(53).setTimer;
-	var format = __webpack_require__(211);
+	var format = __webpack_require__(212);
 
 	return function unhandledRejection(Promise) {
 
@@ -24680,7 +24637,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-20
 
 
 /***/ }),
-/* 211 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-2014 original author or authors */
@@ -24743,7 +24700,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-20
 
 
 /***/ }),
-/* 212 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-2014 original author or authors */
@@ -24753,8 +24710,8 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-20
 (function(define) { 'use strict';
 !(__WEBPACK_AMD_DEFINE_RESULT__ = function (require) {
 
-	var makePromise = __webpack_require__(213);
-	var Scheduler = __webpack_require__(214);
+	var makePromise = __webpack_require__(214);
+	var Scheduler = __webpack_require__(215);
 	var async = __webpack_require__(53).asap;
 
 	return makePromise({
@@ -24767,7 +24724,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-20
 
 
 /***/ }),
-/* 213 */
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-2014 original author or authors */
@@ -25730,7 +25687,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-20
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 214 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-2014 original author or authors */
@@ -25817,7 +25774,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/** @license MIT License (c) copyright 2010-20
 
 
 /***/ }),
-/* 215 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -25836,7 +25793,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 		interceptor = __webpack_require__(34);
 		mime = __webpack_require__(95);
-		registry = __webpack_require__(216);
+		registry = __webpack_require__(217);
 		when = __webpack_require__(15);
 
 		noopConverter = {
@@ -25934,7 +25891,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 
 /***/ }),
-/* 216 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -26036,11 +25993,11 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 		registry = new Registry({});
 
 		// include provided serializers
-		registry.register('application/hal', __webpack_require__(217));
-		registry.register('application/json', __webpack_require__(224));
-		registry.register('application/x-www-form-urlencoded', __webpack_require__(225));
-		registry.register('multipart/form-data', __webpack_require__(226));
-		registry.register('text/plain', __webpack_require__(227));
+		registry.register('application/hal', __webpack_require__(218));
+		registry.register('application/json', __webpack_require__(225));
+		registry.register('application/x-www-form-urlencoded', __webpack_require__(226));
+		registry.register('multipart/form-data', __webpack_require__(227));
+		registry.register('text/plain', __webpack_require__(228));
 
 		registry.register('+json', registry.delegate('application/json'));
 
@@ -26056,7 +26013,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 
 /***/ }),
-/* 217 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -26073,10 +26030,10 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 		var pathPrefix, template, find, lazyPromise, responsePromise, when;
 
-		pathPrefix = __webpack_require__(218);
-		template = __webpack_require__(219);
-		find = __webpack_require__(222);
-		lazyPromise = __webpack_require__(223);
+		pathPrefix = __webpack_require__(219);
+		template = __webpack_require__(220);
+		find = __webpack_require__(223);
+		lazyPromise = __webpack_require__(224);
 		responsePromise = __webpack_require__(55);
 		when = __webpack_require__(15);
 
@@ -26202,7 +26159,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 
 /***/ }),
-/* 218 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -26268,7 +26225,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 
 /***/ }),
-/* 219 */
+/* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -26286,7 +26243,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 		var interceptor, uriTemplate, mixin;
 
 		interceptor = __webpack_require__(34);
-		uriTemplate = __webpack_require__(220);
+		uriTemplate = __webpack_require__(221);
 		mixin = __webpack_require__(54);
 
 		/**
@@ -26331,7 +26288,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 
 /***/ }),
-/* 220 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -26350,7 +26307,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 		var uriEncoder, operations, prefixRE;
 
-		uriEncoder = __webpack_require__(221);
+		uriEncoder = __webpack_require__(222);
 
 		prefixRE = /^([^:]*):([0-9]+)$/;
 		operations = {
@@ -26510,7 +26467,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 
 /***/ }),
-/* 221 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -26697,7 +26654,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 
 /***/ }),
-/* 222 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -26745,7 +26702,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 
 /***/ }),
-/* 223 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -26807,7 +26764,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 
 /***/ }),
-/* 224 */
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -26861,7 +26818,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 
 /***/ }),
-/* 225 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -26958,7 +26915,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 
 /***/ }),
-/* 226 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -27038,7 +26995,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 
 /***/ }),
-/* 227 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -27074,7 +27031,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/*
 
 
 /***/ }),
-/* 228 */
+/* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/*

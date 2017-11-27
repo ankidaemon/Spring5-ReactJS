@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FindAll from './FindAll';
 
 var rest, mime, errorCode, client;
 rest = require('rest'),
@@ -9,40 +10,40 @@ client = rest.wrap(mime).wrap(errorCode);
 
 class App extends Component {
 	
-	getInitialState: function(){
-        return {
-            currentOperation: 'read',
-            id: null
-        };
-    },
- 
-    changeOperation: function(newOperation, id){
+	constructor(props) {
+		super(props);
+		this.state = {
+				currentOperation: 'read',
+	            id: null
+		};
+	}
+	 
+    changeOperation(newOperation, id){
         this.setState({currentOperation: newOperation});
             if(id !== undefined){
             this.setState({id: id});
         }
-    },
+    }
  
-    render: function(){
+    render(){
  
-        var OperationComponent =
-            <FindAll
-            changeOperation={this.changeOperation} />;
+        var OperationComponent = <FindAll changeOperation={this.changeOperation} />;
  
         switch(this.state.currentOperation){
             case 'read':
+            	OperationComponent = <FindAll changeOperation={this.changeOperation} />;
                 break;
             case 'readOne':
-                OperationComponent = <ReadOneProductComponent id={this.state.id} changeOperation={this.changeOperation}/>;
+                OperationComponent = <FindOne id={this.state.id} changeOperation={this.changeOperation}/>;
                 break;
             case 'create':
-                OperationComponent = <CreateProductComponent changeOperation={this.changeOperation}/>;
+                OperationComponent = <Create changeOperation={this.changeOperation}/>;
                 break;
             case 'update':
-                OperationComponent = <UpdateProductComponent id={this.state.id} changeOperation={this.changeOperation}/>;
+                OperationComponent = <Update id={this.state.id} changeOperation={this.changeOperation}/>;
                 break;
             case 'delete':
-                OperationComponent = <DeleteProductComponent id={this.state.id} changeOperation={this.changeOperation}/>;
+                OperationComponent = <Delete id={this.state.id} changeOperation={this.changeOperation}/>;
                 break;
             default:
                 break;
@@ -50,3 +51,6 @@ class App extends Component {
  
         return OperationComponent;
     }
+}
+
+export default App;
