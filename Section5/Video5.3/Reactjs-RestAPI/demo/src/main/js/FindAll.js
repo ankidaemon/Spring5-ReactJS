@@ -30,13 +30,13 @@ class FindAll extends Component {
     		  <div>
        		  <UserListComponent users={this.state.users}/>
     		  <br/>
-       		  <CreateButton changeOperation={this.changeOperation} />
+       		  <CreateButton changeOperation={this.props.changeOperation} />
        		  </div>
       );
     }
 }
 
-class UserListComponent extends React.Component{
+export class UserListComponent extends React.Component{
 	render() {
 		var users = this.props.users.map(user =>
 			<UserComponent key={user.id} user={user}/>
@@ -55,7 +55,7 @@ class UserListComponent extends React.Component{
 	}
 }
 
-class UserComponent extends React.Component{
+export class UserComponent extends React.Component{
 	render() {
 		return (
 			<tr>
@@ -67,5 +67,3 @@ class UserComponent extends React.Component{
 }
 
 export default FindAll;
-export UserComponent;
-export UserListComponent;
