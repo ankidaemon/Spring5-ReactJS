@@ -1,0 +1,39 @@
+{
+  "name": "SpringSecurity-Reactjs-RestAPI",
+  "version": "0.1.0",
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "rest": "^1.3.1"
+  },
+  "scripts": {
+    "watch": "webpack --watch -d"
+  },
+  "description": "Demo of Spring Security + ReactJS + REST",
+  "main": "index.js",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ankidaemon/Spring5-ReactJS.git"
+  },
+  "keywords": [
+    "ReactJs",
+    "and",
+    "Spring Boot",
+    "Spring Security"
+  ],
+  "author": "ankidaemon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ankidaemon/Spring5-ReactJS/issues"
+  },
+  "homepage": "https://github.com/ankidaemon/Spring5-ReactJS#readme"
+}
