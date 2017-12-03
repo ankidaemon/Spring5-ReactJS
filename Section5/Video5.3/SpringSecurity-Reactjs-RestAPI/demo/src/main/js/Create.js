@@ -4,9 +4,8 @@ import CreateButton from './CreateButton';
 var rest, mime, errorCode, client;
 rest = require('rest'),
 mime = require('rest/interceptor/mime');
-errorCode = require('rest/interceptor/errorCode');
  
-client = rest.wrap(mime).wrap(errorCode);
+client = rest.wrap(mime);
 
 class Create extends Component {
 
@@ -69,12 +68,12 @@ class Create extends Component {
     		  <div>
     		    {
     	            this.state.resultStatus == "201" ?
-    	                <h2>User Added Successfully</h2>
+    	                <h2 className="success">User Added Successfully</h2>
     	            : null
     	        } 
     		    {
     	            this.state.resultStatus == "403" ?
-    	                <h2>You are not authorized.</h2>
+    	                <h2 className="error">You are not authorized.</h2>
     	            : null
     	        }
 	    		  <fieldset>

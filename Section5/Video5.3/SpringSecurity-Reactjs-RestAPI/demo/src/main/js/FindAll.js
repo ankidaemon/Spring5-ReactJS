@@ -4,9 +4,8 @@ import CreateButton from './CreateButton';
 var rest, mime, errorCode, client;
 rest = require('rest'),
 mime = require('rest/interceptor/mime');
-errorCode = require('rest/interceptor/errorCode');
  
-client = rest.wrap(mime).wrap(errorCode);
+client = rest.wrap(mime);
 
 class FindAll extends Component {
 
@@ -32,7 +31,7 @@ class FindAll extends Component {
     		  <div>
     		  {
   	            this.state.resultStatus == "403" ?
-  	                <h2>You are not authorized.</h2>
+  	                <h2 className="error">You are not authorized.</h2>
   	            : null
   	          }
        		  <UserListComponent users={this.state.users}/>
