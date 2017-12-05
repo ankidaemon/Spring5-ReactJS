@@ -16,10 +16,10 @@
 *	Video4. Reactive Web Client
 
 ### Section 3: Spring Hibernate Integration and Security
-*	Video1. Hibernate 4 Basics
-*	Video3. CRUD using Spring Hibernate
-*	Video4. Introduction to Spring Security and basics
-*	Video5. Spring Security Configuration
+*	Video1. Hibernate 5 Basics
+*	Video2. CRUD using Spring Hibernate
+*	Video3. Introduction to Spring Security and basics
+*	Video4. Spring Security Configuration
 
 ### Section 4: React Environment and Component
 *	Video1. Introduction to ReactJs and installation
